@@ -8,9 +8,39 @@ CPMG325-2026-101
 **Client ID:** CLI-101
 **Assigned Organisation:** Ditsobotla Local Municipality Offices (Lichtenburg)
 **Industry:** Municipal Services
+---
 
-## Client Summary
+## Milestone 2 - Client Implementation Review (Completed)
 
+### What Was Implemented
+- Inter-VLAN Routing via Switch Virtual Interfaces (SVI) on L3 Core Switch
+- Secure Remote Management (CR9) via SSHv2 on Edge-Router and L3 switch
+- 3 Access Switches with VLAN segmentation (Admin, Finance, HR)
+- Edge-Router + ISP-Router topology (Internet simulation)
+- Complete testing and verification
+
+### VLAN & IP Addressing Plan
+| VLAN | Name | Subnet | Gateway |
+|------|------|--------|---------|
+| 10 | ADMIN | 192.168.45.0/25 | 192.168.45.1 |
+| 20 | FINANCE | 192.168.45.128/26 | 192.168.45.129 |
+| 30 | HR | 192.168.45.192/27 | 192.168.45.193 |
+| 99 | MANAGEMENT | 192.168.45.224/28 | 192.168.45.225 |
+
+### Files Added in Milestone 2
+- `packet_tracer/` — Complete working implementation file
+- `screenshots/` — Testing evidence (pings, VLANs, routing, SSH)
+- `Testing Screenshots/` — Additional configuration evidence
+
+### Testing Results
+| Test | Result |
+|------|--------|
+| Same-VLAN connectivity | Pass (TTL=128) |
+| Inter-VLAN Routing (10→20, 10→30, 30→10) | Pass (TTL=127) |
+| SSH Remote Management (CR9) | Pass |
+| Trunk verification | Pass |
+
+---
 Ditsobotla Local Municipality Offices is a municipal services client based in Lichtenburg. The
 network design must support four functional areas (Administration, Finance, Public
 Services/Records, and IT/Servers) plus secure access for one off-site administrator, all within
