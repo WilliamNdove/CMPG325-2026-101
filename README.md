@@ -28,9 +28,9 @@ CPMG325-2026-101
 | 99 | MANAGEMENT | 192.168.45.224/28 | 192.168.45.225 |
 
 ### Files Added in Milestone 2
-- `packet_tracer/` — Complete working implementation file
-- `screenshots/` — Testing evidence (pings, VLANs, routing, SSH)
-- `Testing Screenshots/` — Additional configuration evidence
+- `Testing-Evidence-Ping-Tests/` — Ping test screenshots (Inter-VLAN verification)
+- `Testing-Evidence-Configuration/` — Configuration screenshots (VLANs, routes, IPs, trunks)
+- `CMPG-325-101_Milestone2_Ndove.pkt` — Working Packet Tracer file
 
 ### Testing Results
 | Test | Result |
@@ -61,13 +61,10 @@ Load-shedding resilience: core devices on UPS, minimal device count preferred.
 ## Repository Structure
 
 ```
-01-client-requirements/   Client requirements write-up
-02-topology/               Physical and logical topology diagrams
-03-ip-addressing/          IP addressing plan (VLSM)
-04-packet-tracer/          .pkt file and device configurations
-05-testing-evidence/       Connectivity testing and verification screenshots
-06-troubleshooting/        Notes on issues encountered and how they were resolved
-07-reflection/             Final project reflection
+Testing-Evidence-Configuration/    Configuration evidence (VLANs, routes, IPs, trunks)
+Testing-Evidence-Ping-Tests/       Ping test evidence (same-VLAN + Inter-VLAN)
+CMPG-325-101_Milestone2_Ndove.pkt  Working Packet Tracer implementation
+README.md                          Project documentation
 ```
 
 ## Project Milestones
