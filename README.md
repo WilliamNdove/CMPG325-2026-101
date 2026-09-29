@@ -1,61 +1,60 @@
 # CMPG325-2026-101
 CPMG325-2026-101
+
 # CMPG 325 – Computer Networks: Individual Semester Project
 
-**Student:** Ndove, W
-**Student Number:** 45157995
-**Project ID:** CMPG325-2026-101
-**Client ID:** CLI-101
-**Assigned Organisation:** Ditsobotla Local Municipality Offices (Lichtenburg)
-**Industry:** Municipal Services
+**Student:** Ndove, W  
+**Student Number:** 45157995  
+**Project ID:** CMPG325-2026-101  
+**Client ID:** CLI-101  
+**Assigned Organisation:** Ditsobotla Local Municipality Offices (Lichtenburg)  
+**Industry:** Municipal Services  
+
 ---
 
 ## Milestone 2 - Client Implementation Review (Completed)
 
 ### What Was Implemented
-- Inter-VLAN Routing via Switch Virtual Interfaces (SVI) on L3 Core Switch
-- Secure Remote Management (CR9) via SSHv2 on Edge-Router and L3 switch
-- 3 Access Switches with VLAN segmentation (Admin, Finance, HR)
-- Edge-Router + ISP-Router topology (Internet simulation)
-- Complete testing and verification
+- **Inter-VLAN Routing (Assigned Challenge):** Configured Switch Virtual Interfaces (SVIs) on the L3 Core Switch with `ip routing` enabled.
+- **Secure Remote Management (CR9):** Configured SSHv2 on the Core-L3-Switch, disabled Telnet, and applied a Management ACL (`MGMT-ACCESS`) restricting access to the management subnet (`192.168.45.112/28`).
+- **Off-site Administrator Path:** Configured a WRT300N wireless router with a static WAN IP (`192.168.45.114`) and WPA2 security, allowing the off-site PC (`PC0`) to securely SSH into the core switch.
+- **Routing:** Added a static route on the Core switch (`ip route 192.168.0.0 255.255.255.0 192.168.45.114`) to allow return traffic to the off-site PC.
+- **Topology:** 1x Core-L3-Switch (3560), 3x Access Switches (2960), 1x WRT300N Wireless Router, and end devices (Admin PCs, Finance PCs, Public/Records PCs, Off-site Admin PC).
 
 ### VLAN & IP Addressing Plan
 | VLAN | Name | Subnet | Gateway |
 |------|------|--------|---------|
-| 10 | ADMIN | 192.168.45.0/25 | 192.168.45.1 |
-| 20 | FINANCE | 192.168.45.128/26 | 192.168.45.129 |
-| 30 | HR | 192.168.45.192/27 | 192.168.45.193 |
-| 99 | MANAGEMENT | 192.168.45.224/28 | 192.168.45.225 |
+| 10 | ADMIN | 192.168.45.0/27 | 192.168.45.1 |
+| 20 | FINANCE | 192.168.45.32/27 | 192.168.45.33 |
+| 30 | PUBLIC SERVICES | 192.168.45.64/27 | 192.168.45.65 |
+| 40 | IT/SERVERS | 192.168.45.96/28 | 192.168.45.97 |
+| 99 | MANAGEMENT | 192.168.45.112/28 | 192.168.45.113 |
 
 ### Files Added in Milestone 2
-- `Testing-Evidence-Ping-Tests/` — Ping test screenshots (Inter-VLAN verification)
-- `Testing-Evidence-Configuration/` — Configuration screenshots (VLANs, routes, IPs, trunks)
-- `CMPG-325-101_Milestone2_Ndove.pkt` — Working Packet Tracer file
+- `05-testing-evidence/` — Screenshots of Inter-VLAN ping tests, CR9 SSH success, SSH denial (negative test), Telnet refusal, and verification commands.
+- `04-packet-tracer/` — Working Packet Tracer file (`.pkt`) and text copies of `show running-config` for all three switches.
+- `06-troubleshooting/` — Documentation of faults encountered and resolved (e.g., trunk encapsulation, `ip routing` enabled, CLI freeze workaround).
 
 ### Testing Results
 | Test | Result |
 |------|--------|
-| Same-VLAN connectivity | Pass (TTL=128) |
-| Inter-VLAN Routing (10→20, 10→30, 30→10) | Pass (TTL=127) |
-| SSH Remote Management (CR9) | Pass |
-| Trunk verification | Pass |
+| Same-VLAN connectivity | Pass |
+| Inter-VLAN Routing (e.g., Admin to Finance) | Pass |
+| CR9: SSH Remote Management from Off-site PC | Pass |
+| CR9: SSH Denial from normal User PC | Pass (ACL blocks it) |
+| CR9: Telnet Refusal | Pass (Connection refused) |
+| `show ip route` (5 connected routes + 1 static) | Pass |
 
 ---
-Ditsobotla Local Municipality Offices is a municipal services client based in Lichtenburg. The
-network design must support four functional areas (Administration, Finance, Public
-Services/Records, and IT/Servers) plus secure access for one off-site administrator, all within
-the assigned addressing block **192.168.45.0/24**.
+Ditsobotla Local Municipality Offices is a municipal services client based in Lichtenburg. The network design must support four functional areas (Administration, Finance, Public Services/Records, and IT/Servers) plus secure access for one off-site administrator, all within the assigned addressing block **192.168.45.0/24**.
 
 ## Assigned Networking Challenge
-
 **Inter-VLAN Routing (L3 switch / SVI)** — Difficulty: Foundational
 
 ## Design Constraint
-
 Load-shedding resilience: core devices on UPS, minimal device count preferred.
 
 ## Change Request
-
 **CR9:** One off-site administrator requires secure remote management access to network devices.
 
 ## Repository Structure
